@@ -67,7 +67,6 @@ addToCart.addEventListener('click', (event) => {
   // variable tableaux
   let productInLocalStorage =
     JSON.parse(localStorage.getItem('addProduct')) ?? [];
-  console.log(document.getElementById('colors').options);
   const color = document.getElementById('colors').value;
   const quantity = parseInt(document.getElementById('quantity').value);
   const imgUrl = document.getElementById('img').src;
@@ -104,25 +103,18 @@ addToCart.addEventListener('click', (event) => {
           'addProduct',
           JSON.stringify(productInLocalStorage)
         );
-
-        console.log(productInLocalStorage);
       } else {
         productInLocalStorage.push(saveOptionProductCart);
         localStorage.setItem(
           'addProduct',
           JSON.stringify(productInLocalStorage)
         );
-
-        console.table(productInLocalStorage);
       }
       //Si le local storage est vide
     } else {
       productInLocalStorage = [];
       productInLocalStorage.push(saveOptionProductCart);
       localStorage.setItem('addProduct', JSON.stringify(productInLocalStorage));
-
-      //addProductComfirmation();
-      console.log(productInLocalStorage);
     }
   } else {
     if (quantity <= 0 && color == '') {

@@ -1,5 +1,5 @@
 let productInLocalStorage = JSON.parse(localStorage.getItem('addProduct'));
-console.table(productInLocalStorage);
+
 //Affichage des éléments dans le DOM
 const cartItems = document.querySelector('#cart__items');
 
@@ -43,7 +43,6 @@ function calculateTotalCart() {
 }
 
 const totalCart = calculateTotalCart();
-console.log(totalCart);
 
 //fonction affiche le nombre d'articles total et le prix total
 function displayTotalCart() {
@@ -57,7 +56,6 @@ displayTotalCart();
 //fonction modif quantité d'articles
 
 let modifItemQuantity = document.querySelectorAll('.itemQuantity');
-console.log(typeof modifItemQuantity);
 
 for (let q = 0; q < modifItemQuantity.length; q++) {
   modifItemQuantity[q].addEventListener('change', (event) => {
@@ -85,8 +83,6 @@ for (let q = 0; q < modifItemQuantity.length; q++) {
 //fonction suppression d'un article
 
 let deleteButton = document.querySelectorAll('.deleteItem');
-console.log(deleteButton);
-//----function deleteItem() {
 for (let d = 0; d < productInLocalStorage.length; d++) {
   deleteButton[d].addEventListener('click', (event) => {
     event.preventDefault();
@@ -119,8 +115,6 @@ class Form {
 //LE FORMULAIRE
 //Bouton commander
 const cartOrderButton = document.getElementById('order');
-console.log('cartOrderButton');
-console.log(cartOrderButton);
 
 //-------------ECOUTE au click-----------------------------
 cartOrderButton.addEventListener('click', (event) => {
@@ -128,9 +122,6 @@ cartOrderButton.addEventListener('click', (event) => {
 
   //Appel de la classe form dans une variable contact
   const contact = new Form();
-
-  console.log('contact');
-  console.log(contact);
 
   //--------------------Validation du formulaire------------------------------//
   //validation du prénom
@@ -236,8 +227,6 @@ cartOrderButton.addEventListener('click', (event) => {
     localStorage.setItem('contact', JSON.stringify(contact));
 
     const getContact = new Form();
-    console.log('getContact');
-    console.log(typeof getContact);
 
     // création du tableau de l'id des produits commander
     let productsOrderId = [];
@@ -245,16 +234,12 @@ cartOrderButton.addEventListener('click', (event) => {
       let productsId = productOrder.productId;
       productsOrderId.push(productsId);
     }
-    console.log('productsOrderId');
-    console.log(typeof productsOrderId);
 
-    //Dans un objet tableau des id produits et formulaire
+    //je place dans un objet, le tableau des id produits et le formulaire
     const productAndForm = {
       products: productsOrderId,
       contact: getContact,
     };
-    console.log('productAndForm');
-    console.log(productAndForm);
 
     //Fonction envoi de productAndForm vers l'API
     fetch('http://localhost:3000/api/products/order', {
@@ -269,7 +254,6 @@ cartOrderButton.addEventListener('click', (event) => {
       })
       .then(function (data) {
         console.log(data);
-        //localStorage.clear();
         localStorage.setItem('orderId', data.orderId);
         window.location.assign('confirmation.html?orderId=' + data.orderId);
       })
